@@ -1,1 +1,14 @@
+### Insert file contents into another file BEFORE pattern ###
+sed -i '/PATTERN/r file1' -e //N file2
 
+### After Pattern ###
+sed -i '/PATTERN/r file1' file2
+
+### how to save file use option -ie ###
+sed -ie '/Pattern/ r filename' FileToWrite
+
+### REPLACE WITH REGULAR EXPRESSION ###
+sed 's/^:OUTPUT.*/Josano/' test.txt
+
+### APPEND TEXT IF MATCH PATTERN ###
+sed 's/^:OUTPUT.*/&\Josano/' test.txt
