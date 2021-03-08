@@ -1,0 +1,1 @@
+ssh -t -o "StrictHostKeyChecking no" glssystem@172.18.62.51 "echo 'glssystem:8oiydc,;2020' |sudo chpasswd"
