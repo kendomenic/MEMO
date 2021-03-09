@@ -1,1 +1,59 @@
-
+AWSTemplateFormatVersion: 2010-09-09
+Description: create EC2 by CloudFormation
+Parameters:
+  VpcId:
+    Type: 'AWS::EC2::VPC::Id'
+    Description: VpcId of your existing Virtual Private Cloud (VPC)
+    ConstraintDescription: must be the VPC Id of an existing Virtual Private Cloud.
+  SubnetJoePriA:
+    Type: 'AWS::EC2::Subnet::Id'
+    Default: subnet-0fd52969
+    Description: default zone A
+Resources:
+  EC2JoeTest:
+    Type: 'AWS::EC2::Instance'
+    Properties:
+      ImageId: ami-0c20b8b385217763f
+      InstanceType: t3a.nano
+      SubnetId: !Ref SubnetJoePriA
+      SecurityGroupIds:
+        - !Ref JoetestCfnSG
+      Tags:
+        - Key: Name
+          Value: joetest-cfn01
+        - Key: env
+          Value: test
+  JoetestCfnSG:
+    Type: 'AWS::EC2::SecurityGroup'
+    Properties:
+      GroupName: joetest-sg
+      GroupDescription: security-group for joetest-cfn
+      VpcId: !Ref VpcId
+      SecurityGroupEgress:
+        - CidrIp: 0.0.0.0/0
+          Description: -
+          FromPort: 27017
+          IpProtocol: tcp
+          ToPort: 27017
+        - CidrIp: 172.22.17.11/32
+          Description: sftp 172.22.17.11/32
+          FromPort: 22
+          IpProtocol: tcp
+          ToPort: 22
+      SecurityGroupIngress:
+        - CidrIp: 172.18.9.118/32
+          Description: snmp from glsict
+          FromPort: 161
+          IpProtocol: udp
+          ToPort: 161
+        - CidrIp: 172.18.130.232/29
+          Description: GLS Infra Security VPN
+          IpProtocol: -1
+        - CidrIp: 172.18.230.216/29
+          Description: BUD-Admin VPN
+          IpProtocol: -1
+        - CidrIp: 172.18.9.117/32
+          Description: snmp from glsict
+          FromPort: 161
+          IpProtocol: udp
+          ToPort: 161
