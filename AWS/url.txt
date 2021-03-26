@@ -1,0 +1,2 @@
+### Generate CloudFormation ###
+https://asecure.cloud/a/configure_data_lifecycle_manager/
