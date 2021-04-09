@@ -31,7 +31,7 @@ Resources:
       VpcId: !Ref VpcId
       SecurityGroupEgress:
         - CidrIp: 0.0.0.0/0
-          Description: -
+          Description: "-"
           FromPort: 27017
           IpProtocol: tcp
           ToPort: 27017
