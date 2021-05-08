@@ -1,0 +1,16 @@
+ extend disk lvm
+
+ lblk
+ fdisk -l
+ fdisk /dev/xvda
+ partprobe -s /dev/xvda
+ pvcreate /dev/xvda4 ## Create new partition##
+ pvdisplay
+ lsblk
+ vgs
+ vgextend vg00 /dev/xvda4
+ vgs
+ pvscan
+ lvextend -L+20G /dev/vg00/lvhome
+ lvs
+ resize2fs /dev/vg00/lvvar

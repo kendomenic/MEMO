@@ -1,0 +1,20 @@
+1. create role to manage ssm
+2. attach role to instance you want to manage
+3. create endpoint not endpoint service at VPC service
+   - For Service Name, choose com.amazonaws.ap-southeast-1.ssm
+   - For VPC, choose the VPC ID you want to connect
+   - For Subnets, choose your subnet id in your vpc or what subnet instance use
+   Note: If you have more than one subnet in the same Availability Zone, you don't need to create VPC endpoints for the extra subnets. Any other subnets within the same Availability Zone can access and use the interface.
+   - For Enable DNS name, checked the box
+   - For Security group, create a new one. The security group must allow inbound HTTPS (port 443) traffic from the resources in your VPC that communicate with the service.
+   - For Type, choose HTTPS.
+   - For Source 
+4. Repeat step 3 with the following change:
+   For Service Name, select com.amazonaws.[region].ec2messages.
+5. Repeat step 5 with the following change:
+   For Service Name, select com.amazonaws.[region].ssmmessages. You must do this if you want to use Session Manager.
+6. restart ssm-agent service "systemctl status amazon-ssm-ag" for centos
+
+ref: https://aws.amazon.com/premiumsupport/knowledge-center/ec2-systems-manager-vpc-endpoints/
+     https://youtu.be/cjSuHarpQJg
+
