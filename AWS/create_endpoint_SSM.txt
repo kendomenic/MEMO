@@ -16,5 +16,6 @@
 6. restart ssm-agent service "systemctl status amazon-ssm-ag" for centos
 
 ref: https://aws.amazon.com/premiumsupport/knowledge-center/ec2-systems-manager-vpc-endpoints/
+     https://docs.aws.amazon.com/systems-manager/latest/userguide/setup-create-vpc.html
      https://youtu.be/cjSuHarpQJg
 
