@@ -1,0 +1,40 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::114774131450:root"
+      },
+      "Action": "s3:PutObject",
+      "Resource": [
+      "arn:aws:s3:::his-np-elb-access-log/mr-app-server-elb/*",
+      "arn:aws:s3:::his-np-elb-access-log/mr-report-server-elb/*"
+      ]
+    },
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "delivery.logs.amazonaws.com"
+      },
+      "Action": "s3:PutObject",
+      "Resource": [
+      "arn:aws:s3:::his-np-elb-access-log/mr-app-server-elb/*",
+      "arn:aws:s3:::his-np-elb-access-log/mr-report-server-elb/*"
+      ],
+      "Condition": {
+        "StringEquals": {
+          "s3:x-amz-acl": "bucket-owner-full-control"
+        }
+      }
+    },
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "delivery.logs.amazonaws.com"
+      },
+      "Action": "s3:GetBucketAcl",
+      "Resource": "arn:aws:s3:::his-np-elb-access-log"
+    }
+  ]
+}
